@@ -1,0 +1,32 @@
+html
+  head
+    title Tea Leaf Express
+  body
+    
+    each val in ActiveSubscriptions
+      form(method='POST' action='/deleteSubscription')
+        ul
+          li= val._name
+          li= val._email
+          li= val._intervalCharge
+          li= val._created
+          li= val._periodStart
+          li= val._periodEnd
+        div.form-group
+          input#SubId.form-control(type='hidden', name='SubId', value=val._id)
+        button.btn.btn-primary(type='submit') Delete Subscription
+
+    h2 Sign up for a Subscription with Tea Leaf Express
+
+    form(action="/valueLeafSubscribe", method="post")
+      article
+        p Value Leaf Plan
+      script(
+        src="//checkout.stripe.com/v2/checkout.js",
+        class="stripe-button",
+        data-key=keyPublishable,
+        data-locale="auto",
+        data-image="http://www.publicdomainpictures.net/pictures/220000/nahled/green-tea-leaves-background-1496170959RMZ.jpg"
+        data-description="Value Leaf Subscription",
+        data-zip-code="true",
+        data-amount="1000")
